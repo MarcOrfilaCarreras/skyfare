@@ -1,0 +1,52 @@
+name: Build & Release on SHA Tag
+
+on:
+  push:
+    branches:
+      - main
+      - master
+
+jobs:
+  build-and-release:
+    runs-on: ubuntu-latest
+    steps:
+      # Checkout full history
+      - name: Checkout code
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+
+      # Configure Git
+      - name: Configure Git
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+
+      # Compute short SHA tag
+      - name: Compute tag name
+        run: |
+          SHORT_SHA=${GITHUB_SHA::7}
+          echo "TAG=$SHORT_SHA" >> $GITHUB_ENV
+
+      # Create & push the tag
+      - name: Create & push tag
+        run: |
+          git tag ${{ env.TAG }}
+          git push origin ${{ env.TAG }}
+
+      # Build
+      - name: Set up Go
+        uses: actions/setup-go@v4
+        with:
+          go-version: '1.22'
+
+      - name: Build all binaries
+        run: make all
+
+      # Publish a GitHub Release
+      - name: Create GitHub Release
+        uses: ncipollo/release-action@v1
+        with:
+          name: ${{ env.TAG }}
+          tag: ${{ env.TAG }}
+          artifacts: "skyfare/skyfare-*"
