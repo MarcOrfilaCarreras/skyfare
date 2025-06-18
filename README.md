@@ -1,62 +1,23 @@
-# Project Title
+# Skyfare
 
-Description of the project.
+Skyfare is a Go-based flight data scraper and aggregator designed to collect airline routes, airports, and flight pricing from multiple sources, with built-in SQLite database migration and storage capabilities.
+
+## Features
+
+- Scrapes airline data, including airports, routes, and flights (currently supports Vueling).
+- Stores data in a SQLite database with a migration system.
+- Repository pattern for clean data access and updates.
+- Centralized logging with configurable verbosity.
+- Handles API token refresh and session initialization.
+- Designed for easy extension to support other airlines or data sources.
 
 ## Installation
 
-### With Docker
-
-1. Clone the Repository:
-```bash
-git clone <url>
+``` bash
+git clone https://github.com/MarcOrfilaCarreras/skyfare.git
+cd skyfare
+make all
 ```
-
-2. Navigate to Project Directory:
-```bash
-cd <folder>
-```
-
-3. Build the Docker Image:
-```bash
-docker build -t <project-name>:latest .
-```
-
-4. Run the Docker Container:
-```bash
-docker run --rm <project-name>:latest
-```
-
-### Without Docker
-
-1. Clone the Repository:
-```bash
-git clone <url>
-```
-
-2. Navigate to Project Directory:
-```bash
-cd <project-name>
-```
-
-3. Install dependencies:
-```bash
-# Add installation command here
-```
-
-4. Run the tool:
-```bash
-# Add command to run the tool here
-```
-
-## Usage
-
-1. Run the Tool:
-    - Open a terminal or command prompt.
-    - Use the `cd` command to navigate to the directory where the tool is located.
-    - Run the tool with appropriate parameters.
-
-2. Additional Notes:
-    - Review the tool's documentation for additional options and usage instructions.
 
 ## License
 
